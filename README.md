@@ -1,1 +1,2 @@
 # JS-pro
+Maxim Kurgun
