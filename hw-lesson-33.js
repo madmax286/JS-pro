@@ -42,9 +42,9 @@ function getTotalPeople() {
     // 1 способ
     let totalStudents = Object.values(subjects).map(elem => elem.students).reduce((sum, elem) => sum + elem)
     let totalTeachers = Object.values(subjects).map(elem => elem.teachers).reduce((sum, elem) => sum + elem)
-    let TttalPeople = totalStudents + totalTeachers
+    let totalPeople = totalStudents + totalTeachers
     
-    console.log(TttalPeople);
+    console.log(totalPeople);
 
     // 2 способ
     let result = Object.values(subjects).map(elem => Object.values(elem).reduce((sum, elem) => sum + elem)).reduce((sum, elem) => sum + elem)
