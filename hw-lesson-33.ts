@@ -1,7 +1,14 @@
 // Протипизировать данные ниже:
 
-// 1.
-  const faculties = [
+// 1
+  interface IFaculties {
+    id: number,
+    faculty: string,
+    subjects: string[],
+    countStudents: number,
+  }
+
+  const faculties: IFaculties[] = [
     {
       id: 1,
       faculty: 'History department',
@@ -28,8 +35,28 @@
     },
   ];
 
-//   2;
-  const movies = [
+// 2
+  interface IMovies {
+    id: number,
+    title: string,
+    year: number,
+    released: string,
+    runtime: string
+    genre: string[],
+    director: string,
+    writer: string,
+    actors: string[],
+    plot: string,
+    country: string,
+    poster: string,
+    imdbRating: number,
+    imdbVotes: number,
+    type: string,
+    boxOffice: string,
+    production: string,
+  }
+
+  const movies: IMovies[] = [
     {
       id: 1,
       title: 'Black Widow',
@@ -64,7 +91,6 @@
       country: 'United Kingdom, United States',
       poster:
         'https://m.media-amazon.com/images/M/MV5BMGVmMWNiMDktYjQ0Mi00MWIxLTk0N2UtN2ZlYTdkN2IzNDNlXkEyXkFqcGdeQXVyODE5NzE3OTE@._V1_SX300.jpg',
-
       imdbRating: 8.1,
       imdbVotes: 790377,
       type: 'movie',
