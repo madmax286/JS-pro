@@ -147,8 +147,13 @@ const getTitlesRate = (movies: IMovies[]): string =>
 console.log(getTitlesRate(movies))
 
 // 4. Создать новый массив, где объекты фильмов будут состоять из следующих полей: id, title, released, plot
-
-const newMoviesArray = (movies: IMovies[]) => 
+interface IMoviesArray {
+    id: number, 
+    title: string, 
+    released: string, 
+    plot: string
+}
+const newMoviesArray = (movies: IMovies[]): IMoviesArray[] => 
     movies.map(({id, title, released, plot}) => ({id, title, released, plot}))
 
 console.log(newMoviesArray(movies))
@@ -182,8 +187,6 @@ console.log(filteredMovies(movies, 'black'));
 // 8. Создать функцию, которая бы принимала 3 параметра: 1)массив фильмов , 2) строка(название поля, например 'title') и строку/число(значение поля "Black Widow"). А результатом этой функции должен быть отфильтрованный массив, где параметры 2 и 3 равны в объекте фильма. Например: передаем (films, 'title', 'Black Widow') и на выходе получаем фильм с id=1, если передаем (films, 'year', 2011) , то получаем фильм с id=2
 
 const filteredMovies2 = (movies: IMovies[], string: string, stringOrNumber: string | number): IMovies[] =>
-    movies.filter(({title, year}): boolean => 
-        string === 'title' && stringOrNumber === title || 
-        string === 'year' && stringOrNumber === year)
+    movies.filter((movie): boolean => movie[string] === stringOrNumber)
 
 console.log(filteredMovies2(movies, 'title', 'Black Widow'));
