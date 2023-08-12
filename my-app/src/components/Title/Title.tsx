@@ -1,10 +1,12 @@
 import React from 'react'
+import './style.css'
 
-const Title = () => {
+const Title = ({text}: {text: string}) => {
+
   return (
-    <div>
-      
-    </div>
+    <h1>
+      {text}
+    </h1>
   )
 }
 

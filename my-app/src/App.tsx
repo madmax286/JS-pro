@@ -1,11 +1,16 @@
 import React from 'react';
 import './App.css';
+import Burger from './components/Burger';
+import Title from './components/Title';
+import Tabs from './components/Tabs';
 
-function App() {
+const App = () => {
+  
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
+      <Burger />
+      <Title text='Sign in' />
+      <Tabs text='tabs'/>
     </div>
   );
 }

@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+}
+.tabs-container {
+    padding: 0 20px;
+}
+h2 {
+    text-transform: uppercase;
+    color: rgb(176, 176, 176);
+    font-weight: 600;
+    text-align: start;
+    margin-bottom: 20px;
+}
+.tabs {
+    display: flex;
+    border-bottom: 2px solid gainsboro;
+    height: 50px;
+}
+.tabs__tab {
+    font-weight: 500;
+    font-size: large;
+    width: 10%;
+    height: 100%;
+    margin-right: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tabs__tab:first-child {
+    border-bottom: 3px solid black;
+}
+.tabs__tab:hover {
+    color: cornflowerblue;
+    cursor: pointer;
+}
