@@ -1,18 +1,19 @@
 import React from 'react';
-import './App.css';
 import Burger from './components/Burger';
 import Title from './components/Title';
 import Tabs from './components/Tabs';
 import PostsList from './components/PostsList';
+import PageTemplate from './components/PageTemplate';
 
 const App = () => {
   
   return (
-    <div className="App">
+    <div className='wrapper'>
       <Burger />
-      <Title text='Sign in' />
+      <Title text='Blog' />
       <Tabs text='tabs'/>
       <PostsList />
+      {/* <PageTemplate /> */}
     </div>
   );
 }
