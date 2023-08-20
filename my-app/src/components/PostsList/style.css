@@ -7,3 +7,13 @@
     grid-row-gap: 40px;
     grid-auto-flow: column;
 }
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    font-size: 20px;
+    font-weight: 500;
+}
+.prev-page:hover, .page-number:hover, .next-page:hover {
+    cursor: pointer;
+}

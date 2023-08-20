@@ -1,5 +1,11 @@
 import React, {useState} from 'react'
 import './style.css'
+import { PostDescription } from './styled'
+import { TextSection } from './styled'
+import { PostFavorites } from './styled'
+import { PostLike } from './styled'
+import { PostFooter } from './styled'
+import { StyledPost } from './styled'
 
 interface IPost {
     id: number,
@@ -12,32 +18,33 @@ interface IPost {
 const Post = ({id, image, text, date, title}: IPost) => {
   const [like, setLike] = useState(0)
   const [dislike, setDislike] = useState(0)
-  const [value, setValue] = useState('⍓')
+  const [value, setValue] = useState(false)
   
   return (
-    <div className={`post post-${id}`}>
-      <div className='post-description'>
+    <StyledPost id={id} className={`post-${id}`} >
+      <PostDescription className='post-description'>
         <img src={image} alt={title} />
 
-        <div className="text-section">
+        <TextSection >
           <h4>{date}</h4>
           <h3>{title}</h3>
           {/* <h5>{text}</h5> */}
-        </div>
-      </div>
-      <div className="post-footer">
-        <div className="post__like">
+        </TextSection>
+      </PostDescription>
+
+      <PostFooter>
+        <PostLike>
           <span onClick={() => setLike(prevState => prevState + 1)}>&#128077;</span>
             <span>{like}</span>
           <span onClick={() => setDislike(prevState => prevState + 1)}>&#128078;</span>
             <span>{dislike}</span>
-        </div>
-        <div className="post__favorites">
-          <span onClick={() => setValue(prevState => !prevState ? '⍓' : '⍌')}>{value}</span>
+        </PostLike>
+        <PostFavorites>
+          <span className={value ? 'selected' : ''} onClick={() => setValue((prevState) => !prevState)}>{value ? '💙' : '💝'}</span>
           <span>&#8943;</span>
-        </div>
-      </div>
-    </div>
+        </PostFavorites>
+      </PostFooter>
+    </StyledPost>
   );
 }
 

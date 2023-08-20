@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import Post from './Post/Post';
-import './style.css'
+import PostPage from './PostPage'
 
 interface IPost {
   id: number,
@@ -10,7 +9,7 @@ interface IPost {
   title: string,
 }
 
-const PostsList = () => {
+const OpenedPost = () => {
   const [posts, setPosts] = useState([]);
 
   // const URL = 'https://studapi.teachmeskills.by/blog/posts/?limit=10'
@@ -42,19 +41,13 @@ const PostsList = () => {
     }, [])
 
   return (
-    <>
-      <div className="posts-container">
+    <div>
         {posts.map(({ id, image, text, date, title }: IPost) => (
-          <Post key={id} id={id} image={image} title={title} text={text} date={date}/>
-        ))}
-      </div>
-      <div className="pagination">
-        <div className="prev-page">&#129144; Prev</div>
-        <div className="page-number">1 2 3 ... 5</div>
-        <div className="next-page">Next &#129146;</div>
-      </div>
-    </>
-  );
+          <PostPage key={id} id={id} image={image} title={title} text={text} date={date}></PostPage>
+        ))[0]}
+
+    </div>
+  )
 }
 
-export default PostsList
+export default OpenedPost

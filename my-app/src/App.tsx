@@ -10,10 +10,10 @@ const App = () => {
   return (
     <div className='wrapper'>
       <Burger />
-      <Title text='Blog' />
+      {/* <Title text='Blog' />
       <Tabs text='tabs'/>
-      <PostsList />
-      {/* <PageTemplate /> */}
+      <PostsList /> */}
+      <PageTemplate />
     </div>
   );
 }
