@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const StyledPost = styled.div<{ id: number}>`
     position: relative;
     padding-bottom: 71px;
-    border-bottom: 1px solid gainsboro;    
+    border-bottom: 1px solid gainsboro; 
 
         &:nth-child(n+7) {
             display: flex;

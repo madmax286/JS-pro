@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react'
+import React, {FC, useState, useRef, useEffect} from 'react'
 
 interface IInput {
     label: string,
@@ -9,16 +9,32 @@ interface IInput {
 }
 
 const Input: FC<IInput> = ({label, placeholder, type, value, onChange}) => {
-  // const [inputValue, setinputValue] = useState('')
+  // const [counter, setCounter] = useState(0)
 
-  // const handleInputChange = (event: React.ChangeEvent) => {
-  //   setinputValue(event.currentTarget.value)
-  // }
+  // const inputRef = useRef<HTMLInputElement | null>(null)
+  // console.log(inputRef);
+
+  // useEffect(() => {
+  //    if (counter%5 === 0) {
+  //     inputRef.current?.focus()
+  //    }
+  // }, [counter])
   
   return (
     <div>
-      <span className='label'>{label}</span>
-      <input type={type} placeholder={placeholder} value={value} onChange={e => onChange(e.currentTarget.value)} />
+      {/* <button type="button" onClick={(e) => setCounter(counter + 1)}>
+        Increment
+      </button>
+      <div>Counter {counter}</div> */}
+      {/* <br /> */}
+      <span className="label">{label}</span>
+      <input
+        // ref={inputRef}
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={(e) => onChange(e.currentTarget.value)}
+      />
     </div>
   );
 }

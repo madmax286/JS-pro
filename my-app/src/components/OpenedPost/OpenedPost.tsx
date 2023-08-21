@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import PostPage from './PostPage'
+import { fetchPosts } from '../../helpers';
 
 interface IPost {
   id: number,
@@ -12,33 +13,11 @@ interface IPost {
 const OpenedPost = () => {
   const [posts, setPosts] = useState([]);
 
-  // const URL = 'https://studapi.teachmeskills.by/blog/posts/?limit=10'
-  const url = new URL('https://64e17765ab0037358818387e.mockapi.io/posts/posts')
-    url.searchParams.append("completed", 'false');
-    url.searchParams.append("page", '1');
-    url.searchParams.append("limit", '12');
+  const url = new URL('https://64e17765ab0037358818387e.mockapi.io/posts/posts?limit=12&page=1&completed=true')
 
-  const fetchPosts = () => {
-    fetch(url, {
-      method: 'GET',
-      headers: {'content-type':'application/json'},
-    })
-      .then(response => {
-          if (response.ok) {
-              return response.json()
-          } 
-      })
-      .then((data: any) => {
-        setPosts(data)
-      })
-      .catch(err => {
-        console.error(err.message);        
-      })
-  }
-
-    useEffect (() => {
-      fetchPosts()
-    }, [])
+  useEffect (() => {
+    fetchPosts(url, setPosts)
+  }, [])
 
   return (
     <div>

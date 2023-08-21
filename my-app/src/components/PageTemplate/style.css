@@ -11,11 +11,6 @@ main {
   flex-grow: 1;
   padding: 20px 100px;
 }
-.pagetemplate {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
 .content {
   display: flex;
   justify-content: center;
@@ -63,6 +58,6 @@ h1 {
     font-size: 50px;
     margin: 0;
 }
-.success-page {
+/* .success-page {
     margin-top: 10%;
-}
+} */
