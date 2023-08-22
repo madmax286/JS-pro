@@ -2,15 +2,15 @@
     margin: 0;
 }
 .tabs-container {
-    padding: 0 20px;
+    padding: 0 50px;
 }
-h2 {
+/* h2 {
     text-transform: uppercase;
     color: rgb(176, 176, 176);
     font-weight: 600;
     text-align: start;
     margin-bottom: 20px;
-}
+} */
 .tabs {
     display: flex;
     border-bottom: 2px solid gainsboro;
