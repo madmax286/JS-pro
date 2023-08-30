@@ -1,9 +1,13 @@
 import React, {createContext, useState, Dispatch, SetStateAction} from 'react';
-import Burger from './components/Burger';
-import Title from './components/Title';
-import Tabs from './components/Tabs';
 import PostsList from './components/PostsList';
 import PageTemplate from './components/PageTemplate';
+import {Link, Route, Routes, useNavigate, useLocation, useParams, NavLink, Navigate} from 'react-router-dom'
+import OpenedPost from './components/OpenedPost';
+import SignIn from './components/SignInPage/SignIn';
+import SuccessPage from './components/SuccessPage';
+import Counter from './components/Counter';
+import Search from './components/Search/Search';
+import SignUp from './components/SignUpPage/SignUp';
 
 interface IThemeContext {
   theme: 'light' | 'dark',
@@ -17,18 +21,24 @@ const App = () => {
   const toggleTheme = () => {   
       setTheme(theme === 'dark' ? 'light' : 'dark')
   }
-  
-  return (
-    <ThemeContext.Provider value={{theme, toggleTheme}}>
-      <div className='wrapper'>
-        <Burger />
-        {/* <Title text='Blog' />
-        <Tabs text='tabs'/>
-        <PostsList /> */}
-        <PageTemplate />
-      </div>
+  // const navigate = useNavigate()
+  const location = useLocation()
 
-    </ThemeContext.Provider>
+  return (
+    <>
+      <ThemeContext.Provider value={{ theme, toggleTheme }}>
+        <Routes>
+          <Route path="/signIn" element={<SignIn />}/>
+          <Route path="/success" element={<SuccessPage />}/>
+          <Route path="/signUp" element={<SignUp />}/>
+
+          <Route path="/blog" element={<PageTemplate children={<PostsList/>}/>}/>
+          <Route path="/blog/:id" element={<PageTemplate children={<OpenedPost/>}/>}/>
+          <Route path="/search" element={<PageTemplate children={<Search/>}/>} />
+        </Routes>
+        {location.pathname === "/" && <Navigate to="blog" />}
+      </ThemeContext.Provider>
+    </>
   );
 }
 

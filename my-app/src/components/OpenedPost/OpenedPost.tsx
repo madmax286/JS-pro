@@ -1,6 +1,11 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import PostPage from './PostPage'
-import { fetchPosts } from '../../helpers';
+import { fetchPosts, url } from '../../helpers';
+import { useNavigate, useParams } from 'react-router';
+import { Link } from 'react-router-dom';
+import Header from '../Header';
+import { ThemeContext } from '../../App';
+import { StyledOpenedPost } from './styled';
 
 interface IPost {
   id: number,
@@ -12,20 +17,27 @@ interface IPost {
 
 const OpenedPost = () => {
   const [posts, setPosts] = useState([]);
-
-  const url = new URL('https://64e17765ab0037358818387e.mockapi.io/posts/posts?limit=12&page=1&completed=true')
+  const {id} = useParams<{id: string }>()
+    console.log(id);
+  const navigate = useNavigate()
+  const {theme, toggleTheme} = useContext(ThemeContext)
 
   useEffect (() => {
     fetchPosts(url, setPosts)
   }, [])
 
   return (
-    <div>
-        {posts.map(({ id, image, text, date, title }: IPost) => (
-          <PostPage key={id} id={id} image={image} title={title} text={text} date={date}></PostPage>
-        ))[0]}
-
-    </div>
+    <>
+    {/* <Link to={`/blog/${+id + 1}`}> */}
+    {/* <Header/> */}
+      { id && 
+        <StyledOpenedPost theme={theme}>
+          {posts.map(({ id, image, text, date, title }: IPost) => (
+            <PostPage key={id} id={id} image={image} title={title} text={text} date={date} posts={posts}></PostPage>
+          ))[+id - 1]}
+      </StyledOpenedPost>}
+    {/* </Link> */}
+    </>
   )
 }
 

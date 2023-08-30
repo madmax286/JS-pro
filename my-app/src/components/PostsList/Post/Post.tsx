@@ -1,11 +1,15 @@
 import React, {useState} from 'react'
+import { useDispatch } from 'react-redux'
+import {Link, Route, Routes, useNavigate, useLocation, useParams, NavLink, Navigate} from 'react-router-dom'
 import './style.css'
-import { PostDescription } from './styled'
-import { TextSection } from './styled'
-import { PostFavorites } from './styled'
-import { PostLike } from './styled'
-import { PostFooter } from './styled'
-import { StyledPost } from './styled'
+import { 
+  SyledPostDescription,
+  SyledTextSection,
+  SyledPostFavorites,
+  SyledPostLike,
+  SyledPostFooter,
+  StyledPost,
+} from './styled'
 
 interface IPost {
     id: number,
@@ -13,37 +17,42 @@ interface IPost {
     text: string,
     date: string,
     title: string,
+    posts: {id: number}[],
 }
 
-const Post = ({id, image, text, date, title}: IPost) => {
+const Post = ({id, image, text, date, title, posts}: IPost) => {
   const [like, setLike] = useState(0)
   const [dislike, setDislike] = useState(0)
   const [value, setValue] = useState(false)
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   
   return (
-    <StyledPost id={id} className={`post-${id}`} >
-      <PostDescription className='post-description'>
+    <StyledPost id={id} posts={posts} >
+      <SyledPostDescription className='post-description'
+        // onClick={() => navigate(`/blog/${id}`, {state: {id: `${id}`}})} 
+        onClick={() => dispatch({type: 'TOGGLE_MODAL', payload: id})}>
         <img src={image} alt={title} />
-
-        <TextSection >
+        <SyledTextSection >
           <h4>{date}</h4>
           <h3>{title}</h3>
           {/* <h5>{text}</h5> */}
-        </TextSection>
-      </PostDescription>
+        </SyledTextSection>
+      </SyledPostDescription>
 
-      <PostFooter>
-        <PostLike>
+      <SyledPostFooter>
+        <SyledPostLike>
           <span onClick={() => setLike(prevState => prevState + 1)}>&#128077;</span>
             <span>{like}</span>
           <span onClick={() => setDislike(prevState => prevState + 1)}>&#128078;</span>
             <span>{dislike}</span>
-        </PostLike>
-        <PostFavorites>
-          <span className={value ? 'selected' : ''} onClick={() => setValue((prevState) => !prevState)}>{value ? '💙' : '💝'}</span>
-          <span>&#8943;</span>
-        </PostFavorites>
-      </PostFooter>
+        </SyledPostLike>
+        <SyledPostFavorites>
+          <span className={value ? 'selected' : ''} onClick={() => setValue((prevState) => !prevState)}>{value ? '💝' : '💙'}</span>
+          <span onClick={() => navigate(`/blog/${id}`, {state: {id: `${id}`}})}>&#8943;</span>
+        </SyledPostFavorites>
+      </SyledPostFooter>
     </StyledPost>
   );
 }

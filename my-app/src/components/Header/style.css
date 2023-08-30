@@ -1,19 +1,28 @@
-.header-burger {
+.header-menu {
+  display: flex;
   width: 100%;
   height: 50px;
   background-color: dodgerblue;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
 }
-.header-burger button {
+.header-menu .search-btn {
+  margin: auto;
+}
+.header-menu .theme-btn {
   border: none;
   position: absolute;
   right: 0;
   top: 0;
   height: 50px;
-  width: 10vw;
+  width: 10%;
+  flex-grow: 1;
   background-color: rgb(0, 106, 213);
   color: white;
 }
-.header-burger button:hover {
+.header-menu .theme-btn:hover {
   background-color: dodgerblue;
   border: 1px solid rgb(0, 106, 213);
 }

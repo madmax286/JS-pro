@@ -1,7 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, createContext} from 'react'
 import Post from './Post/Post';
 import './style.css'
-import { fetchPosts } from '../../helpers';
+import { fetchPosts, url } from '../../helpers';
+import { useNavigate } from 'react-router-dom';
+import Modal from '../Modal/Modal';
+import { useSelector } from 'react-redux';
+import Title from '../Title/Title';
+import Tabs from '../Tabs/Tabs';
 
 interface IPost {
   id: number,
@@ -14,25 +19,48 @@ interface IPost {
 const PostsList = () => {
   const [posts, setPosts] = useState([]);
 
-  // const URL = 'https://studapi.teachmeskills.by/blog/posts/?limit=10'
-  const url = new URL('https://64e17765ab0037358818387e.mockapi.io/posts/posts?limit=12&page=1&completed=true')
-
   useEffect (() => {
     fetchPosts(url, setPosts)
   }, [])
 
+  const modalInfo = useSelector(({modalInfo}) => modalInfo)
+
+  // const navigate = useNavigate()
+  // console.log(url);
+  // let n = 0, m = 12
+  // const handleClick = () => {
+  //   n += 13
+  //   m += 13
+  // }
+
   return (
     <>
+      <Title text="Blog"/>
+      <Tabs text="tabs" />
       <div className="posts-container">
         {posts.map(({ id, image, text, date, title }: IPost) => (
-          <Post key={id} id={id} image={image} title={title} text={text} date={date}/>
-        ))}
+          <Post key={id} id={id} image={image} title={title} text={text} date={date} posts={posts}/>
+        ))
+        // .slice(n, m-1)
+        }
       </div>
       <div className="pagination">
         <div className="prev-page">&#129144; Prev</div>
         <div className="page-number">1 2 3 ... 5</div>
-        <div className="next-page">Next &#129146;</div>
+        <div 
+          // onClick={() => {
+            // handleClick()
+            // console.log(n, m)
+            // console.log(posts.slice(n, m));            
+            
+            // url.searchParams.append('page', '2')
+            // console.log(url);          
+          // }} 
+          className="next-page">
+          Next &#129146;
+        </div>
       </div>
+      {modalInfo.isOpen && <Modal/>}
     </>
   );
 }
