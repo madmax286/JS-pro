@@ -5,7 +5,6 @@ import {Link, Route, Routes, useNavigate, useLocation, useParams, NavLink, Navig
 import OpenedPost from './components/OpenedPost';
 import SignIn from './components/SignInPage/SignIn';
 import SuccessPage from './components/SuccessPage';
-import Counter from './components/Counter';
 import Search from './components/Search/Search';
 import SignUp from './components/SignUpPage/SignUp';
 
@@ -17,27 +16,26 @@ interface IThemeContext {
 export const ThemeContext = createContext<IThemeContext>({theme: 'light', toggleTheme: () => {}})
 
 const App = () => {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light')
-  const toggleTheme = () => {   
-      setTheme(theme === 'dark' ? 'light' : 'dark')
-  }
+  // const [theme, setTheme] = useState<'light' | 'dark'>('light')
+  // const toggleTheme = () => {   
+  //     setTheme(theme === 'dark' ? 'light' : 'dark')
+  // }
   // const navigate = useNavigate()
   const location = useLocation()
 
   return (
     <>
-      <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {/* <ThemeContext.Provider value={{ theme, toggleTheme }}> */}
         <Routes>
-          <Route path="/signIn" element={<SignIn />}/>
-          <Route path="/success" element={<SuccessPage />}/>
-          <Route path="/signUp" element={<SignUp />}/>
-
+          <Route path="/signIn" element={<PageTemplate children={<SignIn />}/>}/>
+          <Route path="/success" element={<PageTemplate children={<SuccessPage />}/>}/>
+          <Route path="/signUp" element={<PageTemplate children={<SignUp />}/>}/>
           <Route path="/blog" element={<PageTemplate children={<PostsList/>}/>}/>
           <Route path="/blog/:id" element={<PageTemplate children={<OpenedPost/>}/>}/>
           <Route path="/search" element={<PageTemplate children={<Search/>}/>} />
         </Routes>
         {location.pathname === "/" && <Navigate to="blog" />}
-      </ThemeContext.Provider>
+      {/* </ThemeContext.Provider> */}
     </>
   );
 }

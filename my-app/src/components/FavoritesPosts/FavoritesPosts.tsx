@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { StyledModal } from './styled'
+import { useNavigate } from 'react-router-dom';
+import { StyledFavoritesPosts } from './styled';
 
 interface IPost {
     id: number,
@@ -9,18 +10,18 @@ interface IPost {
     date: string,
     title: string,
 }
-  
-const Modal = () => {
-    // const [posts, setPosts] = useState([]);
+
+const FavoritesPosts = () => {
     const posts = useSelector((state: any) => state.posts)
     const theme = useSelector(({theme}) => theme)
-    const modalInfo = useSelector(({modalInfo}) => modalInfo)  
-    const dispatch = useDispatch()
+    const postFavorite = useSelector(({postFavorite}) => postFavorite)  
+    
+    const navigate = useNavigate()
 
   return (
-    <StyledModal theme={theme} onClick={() => dispatch({type: 'TOGGLE_MODAL'})}>
+    <StyledFavoritesPosts theme={theme}>
       {posts
-        .filter(({ id }: { id: number }) => modalInfo.id === id)
+        .filter(({ id }: { id: number }) => postFavorite.id === id)
         .map(({ id, image, text, date, title }: IPost) => (
           <div key={id}>
             <img src={image} alt={image} />
@@ -28,8 +29,8 @@ const Modal = () => {
             <h2>{title}</h2>
           </div>
         ))}
-    </StyledModal>
+    </StyledFavoritesPosts>
   );
 }
 
-export default Modal
+export default FavoritesPosts

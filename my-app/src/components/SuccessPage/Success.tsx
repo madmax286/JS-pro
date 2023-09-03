@@ -11,7 +11,7 @@ const Success = () => {
 
   return (
     <div>
-      <Header />
+      {/* <Header /> */}
       <h1>Success</h1>
       <StyledForm action="#" theme={theme}>
         <br />

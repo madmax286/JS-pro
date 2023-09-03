@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import {Link, Route, Routes, useNavigate, useLocation, useParams, NavLink, Navigate} from 'react-router-dom'
 import './style.css'
@@ -24,12 +25,16 @@ const Post = ({id, image, text, date, title, posts}: IPost) => {
   const [like, setLike] = useState(0)
   const [dislike, setDislike] = useState(0)
   const [value, setValue] = useState(false)
+  const theme = useSelector(({theme}) => theme)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  // const like = useSelector(({posts}) => posts)
+  const index = posts.filter(({id}) => id)
   
   return (
-    <StyledPost id={id} posts={posts} >
+    <StyledPost id={id} posts={posts} theme={theme}>
       <SyledPostDescription className='post-description'
         // onClick={() => navigate(`/blog/${id}`, {state: {id: `${id}`}})} 
         onClick={() => dispatch({type: 'TOGGLE_MODAL', payload: id})}>
@@ -49,7 +54,11 @@ const Post = ({id, image, text, date, title, posts}: IPost) => {
             <span>{dislike}</span>
         </SyledPostLike>
         <SyledPostFavorites>
-          <span className={value ? 'selected' : ''} onClick={() => setValue((prevState) => !prevState)}>{value ? '💝' : '💙'}</span>
+          <span className={value ? 'selected' : ''} onClick={() => {
+            setValue((prevState) => !prevState)
+            dispatch({type: 'ADD_FAVORITE'})
+          }}>{value ? '💝' : '💙'}</span>
+          
           <span onClick={() => navigate(`/blog/${id}`, {state: {id: `${id}`}})}>&#8943;</span>
         </SyledPostFavorites>
       </SyledPostFooter>

@@ -1,24 +1,28 @@
 import styled from 'styled-components'
 
-export const StyledSearch = styled.div`
-    /* margin-left: 50px; */
-    /* margin-right: 10%; */
+export const StyledSearch = styled.div<{theme: 'light' | 'dark'}>`
     height: 50px;
-    width: 400px;
-    position: absolute;
+    width: calc(100% - 156px);
+    position: fixed;
     top: 0;
-    left: 50px;
+    left: 56px;
     z-index: 10;
+    background-color: ${({theme}) => theme === 'light' ? 'dodgerblue' : ''};
 
     input {
         height: 50px;
         margin: 0;
         padding-left: 20px;
-        background-color:dodgerblue;
+        background: transparent;
+        color: ${({theme}) => theme === 'dark' ? '' : 'gainsboro'};
         box-sizing: border-box;
+        font-size: 20px;
 
         &::placeholder {
             color: white;
+        }
+        &:focus {
+            outline: none;
         }
     }
 `

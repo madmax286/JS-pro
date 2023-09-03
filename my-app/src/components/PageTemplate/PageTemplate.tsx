@@ -18,8 +18,9 @@ interface IPageTemplate {
 }
 
 const PageTemplate: FC<IPageTemplate> = ({title, children}) => {
-  const {theme, toggleTheme} = useContext(ThemeContext)
+  // const {theme, toggleTheme} = useContext(ThemeContext)
   // const modalInfo = useSelector(({modalInfo}) => modalInfo)
+  const theme = useSelector(({theme}) => theme)
 
   return (
     <>

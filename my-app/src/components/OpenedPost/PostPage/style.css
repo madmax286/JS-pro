@@ -6,9 +6,9 @@
 /* .content a {
     align-self: flex-start;
 } */
-.content h1 {
-    padding: 0 20px 20px;
-}
+/* .content h1 {
+    padding: 0;
+} */
 .content img {
     width: 60%;
 }

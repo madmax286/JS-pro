@@ -1,11 +1,9 @@
 import React, {useState, useEffect, useContext} from 'react'
 import PostPage from './PostPage'
-import { fetchPosts, url } from '../../helpers';
 import { useNavigate, useParams } from 'react-router';
-import { Link } from 'react-router-dom';
-import Header from '../Header';
 import { ThemeContext } from '../../App';
 import { StyledOpenedPost } from './styled';
+import { useSelector } from 'react-redux';
 
 interface IPost {
   id: number,
@@ -16,27 +14,20 @@ interface IPost {
 }
 
 const OpenedPost = () => {
-  const [posts, setPosts] = useState([]);
   const {id} = useParams<{id: string }>()
     console.log(id);
-  const navigate = useNavigate()
   const {theme, toggleTheme} = useContext(ThemeContext)
+  const posts = useSelector((state: any) => state.posts)
 
-  useEffect (() => {
-    fetchPosts(url, setPosts)
-  }, [])
-
+  // const navigate = useNavigate()
   return (
     <>
-    {/* <Link to={`/blog/${+id + 1}`}> */}
-    {/* <Header/> */}
       { id && 
         <StyledOpenedPost theme={theme}>
           {posts.map(({ id, image, text, date, title }: IPost) => (
             <PostPage key={id} id={id} image={image} title={title} text={text} date={date} posts={posts}></PostPage>
           ))[+id - 1]}
       </StyledOpenedPost>}
-    {/* </Link> */}
     </>
   )
 }

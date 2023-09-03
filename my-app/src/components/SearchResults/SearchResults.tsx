@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { fetchPosts, url } from '../../helpers';
-// import { SyledPostFavorites, SyledPostFooter, SyledPostLike } from '../PostsList/Post/styled';
+import Modal from '../Modal/Modal';
 import { StyledResult, StyledResultFooter, StyledResultText } from '../Search/styled';
 
 interface IPost {
@@ -16,11 +16,13 @@ const SearchResults = ({id, image, text, date, title}: IPost) => {
   const [like, setLike] = useState(0)
   const [dislike, setDislike] = useState(0)
   const [value, setValue] = useState(false)
+  const modalInfo = useSelector(({modalInfo}) => modalInfo)
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   
   return (
-    <StyledResult>
+    <StyledResult onClick={() => dispatch({type: 'TOGGLE_MODAL', payload: id})}>
       <img src={image} alt={title} />
 
       <StyledResultText>
@@ -40,6 +42,7 @@ const SearchResults = ({id, image, text, date, title}: IPost) => {
           <span onClick={() => navigate(`/blog/${id}`, {state: {id: `${id}`}})}>&#8943;</span>
         </div>
       </StyledResultFooter>
+      {modalInfo.isOpen && <Modal/>}
 
     </StyledResult>
   );

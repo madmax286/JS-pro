@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledPost = styled.div<{ id: number, posts: {id: number}[]}>`
+const StyledPost = styled.div<{ id: number, posts: {id: number}[], theme: 'light' | 'dark' }>`
     position: relative;
     padding-bottom: 71px;
     border-bottom: 1px solid gainsboro;
@@ -43,16 +43,15 @@ const StyledPost = styled.div<{ id: number, posts: {id: number}[]}>`
             align-self: flex-start;
             margin-left: 5px;
         }
+        &:hover {
+            cursor: pointer;
+            background-color: ${({theme}) => theme === 'dark' ? 'rgb(43, 43, 43)' : 'gainsboro'};
+    }
 `
 const SyledPostDescription = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
-    &:hover {
-        cursor: pointer;
-        background-color: gainsboro;
-    }
 `
 const SyledTextSection = styled.div`
     width: 100%;

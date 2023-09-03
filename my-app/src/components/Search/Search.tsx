@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import Input from '../Input'
 import SearchResults from '../SearchResults'
 import Title from '../Title'
 import { StyledSearch, StyledSearchResults } from './styled'
-import { fetchPosts, url } from '../../helpers';
-import Post from '../PostsList/Post/Post'
+import { useSelector } from 'react-redux'
 
 interface IPost {
   id: number,
@@ -16,11 +14,7 @@ interface IPost {
 
 const Search = () => {
     const [search, setSearch] = useState('')
-    const [posts, setPosts] = useState([]);
-
-    useEffect (() => {
-      fetchPosts(url, setPosts)
-    }, [])
+    const posts = useSelector((state: any) => state.posts)
 
   return (
     <>
@@ -32,7 +26,6 @@ const Search = () => {
           onChange={(e) => setSearch(e.currentTarget.value)}
         />
       </StyledSearch>
-
       <Title text={`Search results '${search}'`} />
       <StyledSearchResults>
         {search.length > 1 && 

@@ -11,7 +11,7 @@ const SignIn = () => {
 
   return (
     <>
-    <Header/>
+    {/* <Header/> */}
     <h1>Sign In</h1>
     <div className='content'>
       <form action="#">
