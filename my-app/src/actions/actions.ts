@@ -1,0 +1,1 @@
+export const INCREMENT_CREATOR = (payload: number) => ({type: 'INCREMENT', payload})

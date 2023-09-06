@@ -1,6 +1,9 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import PostPage from './PostPage'
-import { fetchPosts } from '../../helpers';
+import { useNavigate, useParams } from 'react-router';
+import { ThemeContext } from '../../App';
+import { StyledOpenedPost } from './styled';
+import { useSelector } from 'react-redux';
 
 interface IPost {
   id: number,
@@ -11,21 +14,21 @@ interface IPost {
 }
 
 const OpenedPost = () => {
-  const [posts, setPosts] = useState([]);
+  const {id} = useParams<{id: string }>()
+    console.log(id);
+  const {theme, toggleTheme} = useContext(ThemeContext)
+  const posts = useSelector((state: any) => state.posts)
 
-  const url = new URL('https://64e17765ab0037358818387e.mockapi.io/posts/posts?limit=12&page=1&completed=true')
-
-  useEffect (() => {
-    fetchPosts(url, setPosts)
-  }, [])
-
+  // const navigate = useNavigate()
   return (
-    <div>
-        {posts.map(({ id, image, text, date, title }: IPost) => (
-          <PostPage key={id} id={id} image={image} title={title} text={text} date={date}></PostPage>
-        ))[0]}
-
-    </div>
+    <>
+      { id && 
+        <StyledOpenedPost theme={theme}>
+          {posts.map(({ id, image, text, date, title }: IPost) => (
+            <PostPage key={id} id={id} image={image} title={title} text={text} date={date} posts={posts}></PostPage>
+          ))[+id - 1]}
+      </StyledOpenedPost>}
+    </>
   )
 }
 

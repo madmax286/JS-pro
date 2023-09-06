@@ -3,11 +3,14 @@
     flex-direction: column;
     padding: 20px 50px;
 }
-.content a {
+/* .content a {
     align-self: flex-start;
-}
-.content h1 {
-    padding: 20px;
+} */
+/* .content h1 {
+    padding: 0;
+} */
+.content img {
+    width: 60%;
 }
 .text-page {
     width: 58%;
@@ -25,6 +28,9 @@
 }
 .prev-page {
     flex-direction: row-reverse;
+}
+.prev-page:hover, .next-page:hover {
+    background-color: rgb(203, 203, 203);
 }
 .text-page .like-dislike {
     width: 20%;

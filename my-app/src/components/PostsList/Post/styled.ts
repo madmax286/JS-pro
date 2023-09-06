@@ -1,10 +1,33 @@
 import styled from 'styled-components';
 
-const StyledPost = styled.div<{ id: number}>`
+const StyledPost = styled.div<{ id: number, posts: {id: number}[], theme: 'light' | 'dark' }>`
     position: relative;
     padding-bottom: 71px;
-    border-bottom: 1px solid gainsboro; 
-
+    border-bottom: 1px solid gainsboro;
+    grid-area: ${({id, posts}) => {
+        for (let i = 0; i < posts.length; i++) {                    
+            if (id === posts[i].id) {
+                return '1 / 1 / 3 / 2'
+            }
+            if (id === posts[i+1].id) {
+                return '3 / 1 / 5 / 2'
+            }
+            if (id === posts[i+2].id) {
+                return '5 / 1 / 7 / 2'
+            }
+            if (id === posts[i+3].id) {
+                return '1 / 2 / 3 / 3'
+            }
+            if (id === posts[i+4].id) {
+                return '3 / 2 / 5 / 3'
+            }
+            if (id === posts[i+5].id) {
+                return '5 / 2 / 7 / 3'
+            } else {
+                return ''
+            }
+        }
+    }};        
         &:nth-child(n+7) {
             display: flex;
             flex-direction: column;        
@@ -20,29 +43,33 @@ const StyledPost = styled.div<{ id: number}>`
             align-self: flex-start;
             margin-left: 5px;
         }
+        &:hover {
+            cursor: pointer;
+            background-color: ${({theme}) => theme === 'dark' ? 'rgb(43, 43, 43)' : 'gainsboro'};
+    }
 `
-const PostDescription = styled.div`
+const SyledPostDescription = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 `
-const TextSection = styled.div`
+const SyledTextSection = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
 `
-const PostFavorites = styled.div`
+const SyledPostFavorites = styled.div`
     display: flex;
     justify-content: center;
     width: 15%;
     align-items: center;
 `
-const PostLike = styled.div`
+const SyledPostLike = styled.div`
     display: flex;
     width: 30%;
     justify-content: space-between;
 `
-const PostFooter = styled.div`
+const SyledPostFooter = styled.div`
     position: absolute;
     bottom: 0px;
     width: 100%;
@@ -59,4 +86,4 @@ const PostFooter = styled.div`
     }
 `
 
-export {StyledPost, PostDescription, TextSection, PostFavorites, PostLike, PostFooter}
+export {StyledPost, SyledPostDescription, SyledTextSection, SyledPostFavorites, SyledPostLike, SyledPostFooter}
