@@ -11,6 +11,7 @@ import SearchResults from '../SearchResults'
 import Counter from '../Counter'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import Loader from '../Loader/Loader'
 
 interface IPageTemplate {
     title?: string,
@@ -21,6 +22,7 @@ const PageTemplate: FC<IPageTemplate> = ({title, children}) => {
   // const {theme, toggleTheme} = useContext(ThemeContext)
   // const modalInfo = useSelector(({modalInfo}) => modalInfo)
   const theme = useSelector(({theme}) => theme)
+  const isLoading = useSelector(({isLoading}) => isLoading)
 
   return (
     <>
@@ -28,7 +30,7 @@ const PageTemplate: FC<IPageTemplate> = ({title, children}) => {
       <StyledPageTemplate theme={theme}>
         <main>
         <Link to={'/blog'}>Back to home</Link>
-          {children}
+        {isLoading ? <Loader/> : children}
         </main>
         <footer>
           <span>© 2023</span>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 
 import { StyledHamburger } from "./Hamburger.styled";
 
@@ -7,8 +7,8 @@ export type Props = {
   setOpen: (v: boolean) => void;
 };
 
-const Hamburger = (props: Props) => (
-  <StyledHamburger open={props.open} onClick={() => props.setOpen(!props.open)}>
+const Hamburger: FC<Props> = ({open, setOpen}) => (
+  <StyledHamburger open={open} onClick={() => setOpen(!open)}>
     <div />
     <div />
     <div />

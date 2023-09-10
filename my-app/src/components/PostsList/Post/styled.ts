@@ -5,29 +5,16 @@ const StyledPost = styled.div<{ id: number, posts: {id: number}[], theme: 'light
     padding-bottom: 71px;
     border-bottom: 1px solid gainsboro;
     grid-area: ${({id, posts}) => {
-        for (let i = 0; i < posts.length; i++) {                    
-            if (id === posts[i].id) {
-                return '1 / 1 / 3 / 2'
-            }
-            if (id === posts[i+1].id) {
-                return '3 / 1 / 5 / 2'
-            }
-            if (id === posts[i+2].id) {
-                return '5 / 1 / 7 / 2'
-            }
-            if (id === posts[i+3].id) {
-                return '1 / 2 / 3 / 3'
-            }
-            if (id === posts[i+4].id) {
-                return '3 / 2 / 5 / 3'
-            }
-            if (id === posts[i+5].id) {
-                return '5 / 2 / 7 / 3'
-            } else {
-                return ''
-            }
+        const index = posts.findIndex(post => post.id === id);
+        if (index !== -1 && index < 6) {
+            const row = Math.floor(index / 2) * 2 + 1; // Calculate the row position
+            
+            return `${row} / ${index % 2 + 1} / ${row + 2} / ${index % 2 + 2}`;
         }
+
+        return ''; // Default grid area
     }};        
+    
         &:nth-child(n+7) {
             display: flex;
             flex-direction: column;        

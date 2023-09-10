@@ -36,7 +36,8 @@
 // export default connect(mapStateToProps)(Counter)
 
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, useDispatch,  } from 'react-redux'
+// import { INCREMENT_CREATOR } from '../actions/actions'
 
 const Counter = () => {
     const counter = useSelector((state: any) => state.count) 
@@ -45,7 +46,7 @@ const Counter = () => {
     
   return (
     <div>
-      <button onClick={() => dispatch({type: 'INCREMENT'})}>Increment</button>
+      {/* <button onClick={() => dispatch(INCREMENT_CREATOR(5))}>Increment</button> */}
       <button onClick={() => dispatch({type: 'DECREMENT'})}>Decrement</button>
       <br />
       <span> Counter: {counter}</span>
