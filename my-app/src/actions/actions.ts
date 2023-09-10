@@ -47,8 +47,7 @@ export const FETCH_POSTS = () => {
       let responce = await fetch(
         "https://64e17765ab0037358818387e.mockapi.io/posts/posts?limit=12&page=1"
       );
-      let jsonPosts = await responce.json();
-      let posts = jsonPosts;
+      let posts = await responce.json();
       dispatch({ type: "SET_POSTS", payload: posts });
       return posts;
     } catch (err) {
@@ -74,18 +73,14 @@ export const CREATE_USER = (payload: IUser) => {
         {
           method: "POST",
           headers: { "Content-type": "application/json" },
-          // body: {
-          //   uid: 'NzAyMA',
-          //   token: 'bu48jv-c196d9dbaef54837ac5eea01d9c90cbf',
-          // },
+          body: JSON.stringify(payload)
         }
       );
       console.log(activateUser);
 
-      let jsonPosts = await activateUser.json();
-      let posts = jsonPosts;
-      dispatch({ type: 'SET_USERS', payload: posts });
-      return posts;
+      let user = await activateUser.json();
+      dispatch({ type: 'SET_USERS', payload: user });
+      return user;
     } catch (err) {
       console.log(err);
     } finally {

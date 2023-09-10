@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import SearchResults from '../SearchResults'
-import Title from '../Title'
-import { StyledSearch, StyledSearchResults } from './styled'
 import { useSelector } from 'react-redux'
+import SearchResults from '../SearchResults'
+import { StyledSearch, StyledSearchResults } from './styled'
+import Title from '../Title'
 
 interface IPost {
   id: number,
@@ -14,7 +14,7 @@ interface IPost {
 
 const Search = () => {
     const [search, setSearch] = useState('')
-    const posts = useSelector((state: any) => state.posts)
+    const posts = useSelector(({posts}) => posts)
 
   return (
     <>

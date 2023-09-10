@@ -1,17 +1,10 @@
 import React, {FC, ReactNode, useState, useContext} from 'react'
-import Header from '../Header'
-import './style.css'
-import SignIn from '../SignInPage'
-import Success from '../SuccessPage'
-import PostsList from '../PostsList'
-import OpenedPost from '../OpenedPost'
-import { ThemeContext } from '../../App';
-import { StyledPageTemplate } from './styled'
-import SearchResults from '../SearchResults'
-import Counter from '../Counter'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Loader from '../Loader/Loader'
+import Header from '../Header'
+import { StyledPageTemplate } from './styled'
+import './style.css'
 
 interface IPageTemplate {
     title?: string,

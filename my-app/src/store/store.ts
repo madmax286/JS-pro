@@ -13,8 +13,8 @@ const initialState = {
       },
     theme: 'light',
     modalInfo: {isOpen: false, id: null},
-    postFavorite: {isFavorite: false, id: null},
     isLoading: false,
+    activeTab: 'All',
 }
 
 const rootReducer = (state = initialState, action: any) => {
@@ -58,22 +58,36 @@ const rootReducer = (state = initialState, action: any) => {
                 isLoading: !state.isLoading,
             }
         }
-
-        case 'ADD_FAVORITE': {
+        case "SET_ACTIVE_TAB" : {
             return {
-                ...state,
-                postFavorite: {
-                    isFavorite: !state.postFavorite.isFavorite,
-                    id: action.payload
-                }
+              ...state,
+              activeTab: action.payload,
             }
         }
+        case "ADD_TO_FAVORITE" : {
+            return {
+              ...state,
+              posts: state.posts.map((post: {id: number, isFavorite?: boolean}) => {
+                if (post.id === action.payload) {
+                    post = {
+                        ...post, 
+                        isFavorite: post.isFavorite !== undefined && post.isFavorite ? post.isFavorite = false : true
+                    };
+                 return post;
+                }
+                return post;
+              })
+            }
+          }
         case 'ADD_LIKE': {
             return {
                 ...state,
                 posts: state.posts.map((post: {id: number, like?: number}) => {
                     if (post.id === action.payload) {
-                        post.like ? post.like++ : post.like = 0
+                        post = {
+                            ...post, 
+                            like: post.like !== undefined ? post.like + 1 : 1
+                        }
                     }
                     return post
                 })
@@ -84,7 +98,11 @@ const rootReducer = (state = initialState, action: any) => {
                 ...state,
                 posts: state.posts.map((post: {id: number, like?: number}) => {
                     if (post.id === action.payload) {
-                        post.like ? post.like-- : post.like = 0
+                        post = {
+                            ...post, 
+                            like: post.like !== undefined && post.like > 0 ? post.like - 1 : 0
+                        }
+                        return post
                     }
                     return post
                 })
@@ -94,6 +112,8 @@ const rootReducer = (state = initialState, action: any) => {
             return state
     }
 }
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
+const store = createStore(
+    rootReducer, 
+    composeWithDevTools(applyMiddleware(thunk)))
 
 export default store

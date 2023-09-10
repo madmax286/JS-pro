@@ -1,9 +1,9 @@
 import React, {useState, useEffect, useContext} from 'react'
-import PostPage from './PostPage'
 import { useNavigate, useParams } from 'react-router';
 import { ThemeContext } from '../../App';
-import { StyledOpenedPost } from './styled';
 import { useSelector } from 'react-redux';
+import PostPage from './PostPage'
+import { StyledOpenedPost } from './styled';
 
 interface IPost {
   id: number,
@@ -11,25 +11,39 @@ interface IPost {
   text: string,
   date: string,
   title: string,
+  like?: number,
+  isFavorite?: boolean
 }
 
 const OpenedPost = () => {
   const {id} = useParams<{id: string }>()
-    console.log(id);
-  const {theme, toggleTheme} = useContext(ThemeContext)
-  const posts = useSelector((state: any) => state.posts)
-
+  const posts = useSelector(({posts}) => posts)
+  
+  // const {theme, toggleTheme} = useContext(ThemeContext)
   // const navigate = useNavigate()
   return (
     <>
-      { id && 
-        <StyledOpenedPost theme={theme}>
-          {posts.map(({ id, image, text, date, title }: IPost) => (
-            <PostPage key={id} id={id} image={image} title={title} text={text} date={date} posts={posts}></PostPage>
-          ))[+id - 1]}
-      </StyledOpenedPost>}
+      {id && (
+        <StyledOpenedPost>
+          {
+            posts.map(({ id, image, text, date, title, like, isFavorite }: IPost) => (
+              <PostPage
+                key={id}
+                id={id}
+                image={image}
+                title={title}
+                text={text}
+                date={date}
+                posts={posts}
+                like={like}
+                isFavorite={isFavorite}
+              ></PostPage>
+            ))[+id - 1]
+          }
+        </StyledOpenedPost>
+      )}
     </>
-  )
+  );
 }
 
 export default OpenedPost

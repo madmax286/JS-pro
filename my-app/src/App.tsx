@@ -1,7 +1,7 @@
 import React, {createContext, useState, Dispatch, SetStateAction} from 'react';
+import {Link, Route, Routes, useNavigate, useLocation, useParams, NavLink, Navigate} from 'react-router-dom'
 import PostsList from './components/PostsList';
 import PageTemplate from './components/PageTemplate';
-import {Link, Route, Routes, useNavigate, useLocation, useParams, NavLink, Navigate} from 'react-router-dom'
 import OpenedPost from './components/OpenedPost';
 import SignIn from './components/SignInPage/SignIn';
 import SuccessPage from './components/SuccessPage';
