@@ -6,6 +6,9 @@ import Modal from '../Modal/Modal';
 import './style.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { FETCH_POSTS } from '../../actions/actions';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
 
 interface IPost {
   id: number,
@@ -16,32 +19,24 @@ interface IPost {
 }
 
 // let page = 1
-let url = new URL(`https://64e17765ab0037358818387e.mockapi.io/posts/posts?limit=12&page=1`)
+// let url = new URL(`https://64e17765ab0037358818387e.mockapi.io/posts/posts?limit=12&page=1`)
 // url.searchParams.append('page', `${page}`)
 
-const fetchPosts = (url: URL) => fetch(url, {
-    method: 'GET',
-    headers: {'content-type':'application/json'},
-  })
+// const fetchPosts = (url: URL) => fetch(url, {
+//     method: 'GET',
+//     headers: {'content-type':'application/json'},
+//   })
 
 const PostsList = () => {
   const posts = useSelector((state: any) => state.posts)
   const modalInfo = useSelector(({modalInfo}) => modalInfo)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>();
+  useEffect (() => {     
 
-  useEffect (() => {
-    fetchPosts(url)
-    .then(response => {
-      if (response.ok) {
-          return response.json()
-      } 
-  })
-  .then((data) => {
-    dispatch({type: 'SET_POSTS', payload: data})
-  })
-  .catch(err => {
-    console.error(err.message);        
-  })
+    if (!posts.length) {
+      dispatch(FETCH_POSTS());      
+    }
+    // console.log(1);
   }, [])
 
   // const asd = (url: URL) => url.searchParams.set('page', `${page++}`)
@@ -61,7 +56,7 @@ const PostsList = () => {
         <div onClick={() => {
             // url.searchParams.set('page', `${page++}`)
             // asd(url)
-            console.log(url);
+            // console.log(url);
           }} 
           className="next-page">
           Next &#129146;

@@ -7,6 +7,7 @@ import SignIn from './components/SignInPage/SignIn';
 import SuccessPage from './components/SuccessPage';
 import Search from './components/Search/Search';
 import SignUp from './components/SignUpPage/SignUp';
+import ActivateUser from './components/ActivateUser';
 
 interface IThemeContext {
   theme: 'light' | 'dark',
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/blog" element={<PageTemplate children={<PostsList/>}/>}/>
           <Route path="/blog/:id" element={<PageTemplate children={<OpenedPost/>}/>}/>
           <Route path="/search" element={<PageTemplate children={<Search/>}/>} />
+          <Route path="/activate/:uid/:token" element={<PageTemplate children={<ActivateUser/>}/>} />
         </Routes>
         {location.pathname === "/" && <Navigate to="blog" />}
       {/* </ThemeContext.Provider> */}

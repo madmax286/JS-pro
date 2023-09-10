@@ -1,12 +1,20 @@
-import { legacy_createStore as createStore } from "redux";
+import { legacy_createStore as createStore, applyMiddleware } from "redux";
 import {composeWithDevTools} from 'redux-devtools-extension'
+import thunk from "redux-thunk";
 
 const initialState = {
     count: 0,
     posts: [],
+    user: {
+        username: "",
+        email: "",
+        id: null,
+        isActivated: false,
+      },
     theme: 'light',
     modalInfo: {isOpen: false, id: null},
     postFavorite: {isFavorite: false, id: null},
+    isLoading: false,
 }
 
 const rootReducer = (state = initialState, action: any) => {
@@ -32,6 +40,25 @@ const rootReducer = (state = initialState, action: any) => {
                 posts: action.payload,
             }
         }
+        case 'SET_USERS': {
+            return {
+                ...state,
+                posts: action.payload,
+            }
+        }
+        case 'SET_ACTIVATION': {
+            return {
+                ...state,
+                user: {...state.user, isActivated: action.payload},
+            }
+        }
+        case 'SET_LOADING': {
+            return {
+                ...state,
+                isLoading: !state.isLoading,
+            }
+        }
+
         case 'ADD_FAVORITE': {
             return {
                 ...state,
@@ -63,24 +90,10 @@ const rootReducer = (state = initialState, action: any) => {
                 })
             }
         }
-
-        // case 'INCREMENT': {
-        //     return {
-        //         ...state,
-        //         count: state.count + action.payload
-        //     }
-        // }
-        // case 'DECREMENT': {
-        //     return {
-        //         ...state,
-        //         count: state.count - 1
-        //     }
-        // }
         default:
             return state
     }
 }
-
-const store = createStore(rootReducer, composeWithDevTools())
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)))
 
 export default store
