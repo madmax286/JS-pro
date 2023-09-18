@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
 import { useNavigate, useParams } from 'react-router';
-import { ThemeContext } from '../../App';
 import { useSelector } from 'react-redux';
 import PostPage from './PostPage'
 import { StyledOpenedPost } from './styled';
@@ -19,8 +18,6 @@ const OpenedPost = () => {
   const {id} = useParams<{id: string }>()
   const posts = useSelector(({posts}) => posts)
   
-  // const {theme, toggleTheme} = useContext(ThemeContext)
-  // const navigate = useNavigate()
   return (
     <>
       {id && (

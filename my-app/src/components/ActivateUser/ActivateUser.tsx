@@ -15,12 +15,8 @@ const ActivateUser = () => {
     }, [uid, token])
     
   return (
-    <div>
-      Hello
-    </div>
+    <div></div>
   )
 }
 
 export default ActivateUser
-
-// NzAyMA/bu48jv-c196d9dbaef54837ac5eea01d9c90cbf

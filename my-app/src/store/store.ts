@@ -5,6 +5,7 @@ import thunk from "redux-thunk";
 const initialState = {
     count: 0,
     posts: [],
+    post: [],
     user: {
         username: "",
         email: "",
@@ -40,6 +41,12 @@ const rootReducer = (state = initialState, action: any) => {
                 posts: action.payload,
             }
         }
+        case "SET_SELECTED_POST": {
+            return {
+                ...state,
+                post: action.payload,
+            };
+          }
         case 'SET_USERS': {
             return {
                 ...state,
@@ -49,7 +56,7 @@ const rootReducer = (state = initialState, action: any) => {
         case 'SET_ACTIVATION': {
             return {
                 ...state,
-                user: {...state.user, isActivated: action.payload},
+                user: {...state.user, isActivated: true},
             }
         }
         case 'SET_LOADING': {

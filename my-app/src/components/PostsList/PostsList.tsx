@@ -4,7 +4,6 @@ import Title from '../Title/Title';
 import Tabs from '../Tabs/Tabs';
 import Modal from '../Modal/Modal';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { FETCH_POSTS } from '../../actions/actions';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
@@ -33,7 +32,6 @@ const PostsList = () => {
     }
   }, [])
 
-  // const asd = (url: URL) => url.searchParams.set('page', `${page++}`)
   return (
     <>
       <Title text="Blog" />
@@ -101,16 +99,7 @@ const PostsList = () => {
       <div className="pagination">
         <div className="prev-page">&#129144; Prev</div>
         <div className="page-number">1 2 3 ... 5</div>
-        <div
-          onClick={() => {
-            // url.searchParams.set('page', `${page++}`)
-            // asd(url)
-            // console.log(url);
-          }}
-          className="next-page"
-        >
-          Next &#129146;
-        </div>
+        <div className="next-page">Next &#129146;</div>
       </div>
       {modalInfo.isOpen && <Modal />}
     </>

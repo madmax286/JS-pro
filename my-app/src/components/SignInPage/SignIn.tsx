@@ -1,6 +1,9 @@
 import React, {useState} from 'react'
+import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import Header from '../Header'
+import { AnyAction } from 'redux'
+import { ThunkDispatch } from 'redux-thunk'
+import { SIGN_IN } from '../../actions/actions'
 import Input from '../Input'
 
 const SignIn = () => {
@@ -8,10 +11,10 @@ const SignIn = () => {
   const [password, setPassword] = useState('')
   
   const navigate = useNavigate()
+  const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>()
 
   return (
     <>
-    {/* <Header/> */}
     <h1>Sign In</h1>
     <div className='content'>
       <form action="#">
@@ -19,8 +22,8 @@ const SignIn = () => {
         <Input type="password" label="Password" placeholder="Your password" value={password} onChange={setPassword} />
         <a href="#">Forgot password?</a>
         <button type='button' className='btn-signin'
-          onClick={() => navigate('/success')}>
-            Sign In
+          onClick={() => dispatch(SIGN_IN(navigate, email, password))}>
+          Sign In
         </button>
         <div className='signup'>
           <span>Don't have an account?</span>
