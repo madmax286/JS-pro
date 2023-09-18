@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AnyAction } from 'redux'
 import { ThunkDispatch } from 'redux-thunk'
 import { CREATE_USER } from '../../actions/actions'
-import Header from '../Header'
 import Input from '../Input'
 
 const SignUp = () => {
@@ -13,12 +12,10 @@ const SignUp = () => {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   
-  const navigate = useNavigate()
   const dispatch = useDispatch<ThunkDispatch<any, {}, AnyAction>>()
 
   return (
     <>
-    {/* <Header/> */}
     <h1>Sign Up</h1>
     <div className='content'>
       <form action="#">
@@ -28,11 +25,7 @@ const SignUp = () => {
         <Input type="password" label="Confirm Password" placeholder="Confirm password" value={confirmPassword} onChange={setConfirmPassword} />
 
         <button type='button' className='btn-signin'
-          onClick={() => {
-            dispatch(CREATE_USER({email, password, username: name}))
-            navigate('/success')
-          }          
-          }>
+          onClick={() => dispatch(CREATE_USER({email, password, username: name}))}>
             Sign Up
         </button>
 

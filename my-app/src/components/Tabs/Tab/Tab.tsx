@@ -1,16 +1,20 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import '../style.css'
 
-const Tab = ({text, path}: {text: string, path: string}) => {
-  const navigate = useNavigate()
+const Tab = ({text}: {text: string}) => {
+  const dispatch = useDispatch()
+  const activeTab = useSelector(({activeTab}) => activeTab)
 
   return (
-    <div className='tabs__tab' onClick={() => navigate(`/blog/${path}`)}>
+    <div
+      className={`tabs__tab ${activeTab === text ? "active-tab" : ""}`}
+      onClick={() => dispatch({ type: "SET_ACTIVE_TAB", payload: text })}
+    >
       {text}
     </div>
-  )
+  );
 }
 
 export default Tab

@@ -28,7 +28,11 @@ const Menu = () => {
             <StyledSun theme={theme} onClick={() => dispatch({type: 'TOGGLE_THEME', payload: 'light'})}>&#9788;</StyledSun>
             <StyledMoon theme={theme} onClick={() => dispatch({type: 'TOGGLE_THEME', payload: 'dark'})}>&#9790;</StyledMoon>
           </StyledToggleTheme>
-          <StyledLink onClick={() => {close(); navigate('/signUp')}}>Log Out</StyledLink>
+          <StyledLink onClick={() => {
+            close();
+            localStorage.removeItem('access')
+            navigate('/signIn')
+            }}>Log Out</StyledLink>
           <StyledLink onClick={() => {close(); navigate('/signIn')}}>Sign In</StyledLink>
         </StyledMenuFooter>
       </StyledMenu>

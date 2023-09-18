@@ -30,6 +30,9 @@ const StyledPost = styled.div<{ id: number, posts: {id: number}[], theme: 'light
             align-self: flex-start;
             margin-left: 5px;
         }
+        &:nth-child(n+7) h3 {
+            font-size: 1.4vw;
+        }
         &:hover {
             cursor: pointer;
             background-color: ${({theme}) => theme === 'dark' ? 'rgb(43, 43, 43)' : 'gainsboro'};
@@ -48,7 +51,7 @@ const SyledTextSection = styled.div`
 const SyledPostFavorites = styled.div`
     display: flex;
     justify-content: center;
-    width: 15%;
+    width: 25%;
     align-items: center;
 `
 const SyledPostLike = styled.div`
@@ -69,6 +72,9 @@ const SyledPostFooter = styled.div`
 
         &:hover {
             cursor: pointer;
+        }
+        &:active {
+            transform: scale(1.2);
         }
     }
 `

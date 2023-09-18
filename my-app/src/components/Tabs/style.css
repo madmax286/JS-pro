@@ -1,16 +1,6 @@
 * {
     margin: 0;
 }
-/* .tabs-container {
-    padding: 0 50px;
-} */
-/* h2 {
-    text-transform: uppercase;
-    color: rgb(176, 176, 176);
-    font-weight: 600;
-    text-align: start;
-    margin-bottom: 20px;
-} */
 .tabs {
     display: flex;
     border-bottom: 2px solid gainsboro;
@@ -26,11 +16,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: .4s;
 }
-.tabs__tab:first-child {
+/* .tabs__tab:first-child {
     border-bottom: 3px solid black;
-}
+} */
 .tabs__tab:hover {
     color: cornflowerblue;
     cursor: pointer;
+}
+.active-tab {
+    color: cornflowerblue;
+    border-bottom: 3px solid black;
 }

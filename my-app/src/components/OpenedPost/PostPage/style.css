@@ -3,12 +3,10 @@
     flex-direction: column;
     padding: 20px 50px;
 }
-/* .content a {
-    align-self: flex-start;
-} */
-/* .content h1 {
-    padding: 0;
-} */
+h2 {
+    font-size: 30px;
+    padding: 0 50px 20px;
+}
 .content img {
     width: 60%;
 }
@@ -20,6 +18,9 @@
 .text-page .add-to-favorites {
     width: 40%;
     background-color: rgb(203, 203, 203);
+}
+.selected {
+    color: rgb(190, 32, 32);
 }
 .add-to-favorites span, .like-dislike span, .next-page, .prev-page {
     display: flex;
